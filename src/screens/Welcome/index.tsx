@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     Text,
     View,
-    Image
+    Image, StatusBar
 } from 'react-native';
 
 import watering from '../../assets/watering.png'
@@ -15,6 +15,7 @@ import Button from '../../components/Button'
 const Welmcome = () => {
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar hidden={true}/>
             <Text style={styles.title}>
                 Gerencie {'\n'} 
                 suas plantas {'\n'} 
