@@ -9,24 +9,30 @@ import {
 
 import watering from '../../assets/watering.png'
 import styles from './styles'
-
-import Button from '../../components/Button'
+import Icon from 'react-native-vector-icons/FontAwesome'
+Icon.loadFont();
 
 const Welmcome = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar hidden={true}/>
+            <StatusBar hidden={true} />
             <Text style={styles.title}>
-                Gerencie {'\n'} 
-                suas plantas {'\n'} 
+                Gerencie {'\n'}
+                suas plantas {'\n'}
                 de forma fácil
             </Text>
-            <Image style={styles.image} source={watering}/>
+            <Image style={styles.image} source={watering} resizeMode="contain" />
             <Text style={styles.description}>
                 Não esqueça mais de regar suas plantas.
                 Nós cuidamos de lembrar pra você sempre que precisar.
             </Text>
-            <Button title=">" onPress={()=>{}}/>
+            <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+                <Icon
+                    name="chevron-right"
+                    size={16}
+                    color="#FFF"
+                />
+            </TouchableOpacity>
         </ SafeAreaView>
     );
 };
