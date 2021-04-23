@@ -16,7 +16,7 @@ import Button from '../../components/Button'
 import colors from '../../styles/index'
 Icon.loadFont();
 
-const Welmcome = () => {
+const UserIdentification = () => {
     
     const [ isFocus, setIsFocus ] = useState(false);
     const [ isFilled, setIsFilled ] = useState(false);
@@ -77,4 +77,4 @@ const Welmcome = () => {
 };
 
 
-export default Welmcome;
+export default UserIdentification;

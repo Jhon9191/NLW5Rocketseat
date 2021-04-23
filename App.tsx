@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 
 import Welmcome from './src/screens/Welcome'
 import UserIdentification from './src/screens/UserIdentification'
-
+import Confirmation from './src/screens/Confirmation'
 interface propsT {
     splash: number;
 }
@@ -26,12 +26,12 @@ const App = () => {
     return (
         <>
             {time <= 3 ? (
-                 <UserIdentification />
+                 <Confirmation />
                 // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#121212" }}>
                 //     <Text>Loading</Text>
                 // </View>
             ) : (
-                <UserIdentification />
+                <Confirmation />
             )
             }
         </>
