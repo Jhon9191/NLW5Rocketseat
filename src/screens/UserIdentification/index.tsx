@@ -1,36 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     SafeAreaView,
-    TouchableOpacity,
     Text,
     View,
-    TextInput
+    TextInput,
+    KeyboardAvoidingView,
+    Platform,
+    PushNotification
 } from 'react-native';
 
 
 import styles from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Button from '../../components/Button'
+import colors from '../../styles/index'
 Icon.loadFont();
 
 const Welmcome = () => {
+    
+    const [ isFocus, setIsFocus ] = useState(false);
+    const [ isFilled, setIsFilled ] = useState(false);
+    const [ name, setName ] = useState<string>("");
+
+    const handleBlur = () => {
+        setIsFocus(false);
+        setIsFilled(!!name);
+    }
+    
+    const handleFocus  = () => {
+        setIsFocus(true);
+    }
+
+    const handleFilled = (value : string) => {
+        setIsFilled(!!value);
+        setName(value);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.content}>
-                <View style={styles.form}>
-                    <Text style={styles.title}>Como podemos {'\n'}
-                    chamar você?
-                    </Text>
-                    <Text style={styles.emoji}>
-                        😄
-                    </Text>
-                    <TextInput style={styles.input}></TextInput>
-
-                    <View style={styles.footer}>
-                    <Button title="Salvar" />
+            <KeyboardAvoidingView 
+                style={styles.content}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+                <View style={styles.content}>
+                    <View style={styles.form}>
+                  
+                        <View style={{alignItems: 'center'}}> 
+                        <Text style={styles.emoji}>
+                            {isFilled ? '😄' : '😃'}    
+                        </Text>
+                        <Text style={styles.title}>
+                            {'\n'}
+                            Como podemos {'\n'}
+                            chamar você?
+                         </Text>
+                        </View>
+                        <TextInput 
+                        onBlur={handleBlur}
+                        onFocus={handleFocus}
+                        onChangeText={handleFilled}
+                        style={[
+                            styles.input,
+                            (isFocus && isFilled) && {borderColor: colors.green}
+                        ]} 
+                        placeholder="Digite seu nome"></TextInput>
+                        <View style={styles.footer}>
+                            <Button title="Salvar" />
+                        </View>
+                        
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
 
     );

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
 
     emoji:{
-        fontSize: 44
+        fontSize: 44,
     },
 
     input:{
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         borderColor: colors.gray,
         color: colors.heading,
         width:'100%',
-        fontSize: 10,
+        fontSize: 18,
         marginTop: 50,
         padding: 10,
         textAlign: 'center'
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     footer:{
         width:'100%',
         paddingHorizontal: 20
-    }
+    },
+
+    
 });
 
 export default styles;
