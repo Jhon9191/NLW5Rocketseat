@@ -15,26 +15,24 @@ interface buttonProps extends TouchableOpacityProps {
 
 const Button = ( {title, ...rest} : buttonProps) => {
     return (
-        <View>
             <TouchableOpacity style={styles.button} activeOpacity={0.7} {...rest}>
                 <Text style={styles.textButton}>
                     {title}
                 </Text>
             </TouchableOpacity>
-        </View>
     )
 }
 
 const styles = StyleSheet.create({
     
     button:{
+        marginTop: 15,
         backgroundColor: colors.green,
         justifyContent:'center',
         alignItems: 'center',
         borderRadius: 16,
         marginBottom: 10,
         height: 56,
-        width: 56
     },
 
     textButton:{

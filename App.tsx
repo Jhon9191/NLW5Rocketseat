@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Welmcome from './src/screens/Welcome'
 import { View, Text } from 'react-native'
+
+import Welmcome from './src/screens/Welcome'
+import UserIdentification from './src/screens/UserIdentification'
+
 interface propsT {
     splash: number;
 }
@@ -23,12 +26,12 @@ const App = () => {
     return (
         <>
             {time <= 3 ? (
-                 <Welmcome />
+                 <UserIdentification />
                 // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#121212" }}>
                 //     <Text>Loading</Text>
                 // </View>
             ) : (
-                <Welmcome />
+                <UserIdentification />
             )
             }
         </>
