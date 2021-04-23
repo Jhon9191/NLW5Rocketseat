@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native'
-
-import Welmcome from './src/screens/Welcome'
-import UserIdentification from './src/screens/UserIdentification'
-import Confirmation from './src/screens/Confirmation'
+import Routes from './src/routes';
+import 'react-native-gesture-handler';
 interface propsT {
     splash: number;
 }
@@ -24,17 +21,18 @@ const App = () => {
     }, [time])
 
     return (
-        <>
-            {time <= 3 ? (
-                 <Confirmation />
-                // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#121212" }}>
-                //     <Text>Loading</Text>
-                // </View>
-            ) : (
-                <Confirmation />
-            )
-            }
-        </>
+        <Routes/>
+        // <>
+        //     {time <= 3 ? (
+        //          <Routes />
+        //         // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#121212" }}>
+        //         //     <Text>Loading</Text>
+        //         // </View>
+        //     ) : (
+        //         <Routes />
+        //     )
+        //     }
+        // </>
 
     );
 };
