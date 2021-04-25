@@ -7,12 +7,15 @@ import {
 import { useNavigation } from  '@react-navigation/core'
 import styles from './styles';
 
+import Header from '../../components/Header'
+
 const PlantSelected = () => {
     
     return (
-        <SafeAreaView style={styles.container}>
-            <Text>Plant</Text>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <Header/>
+            
+        </View>
 
     );
 };
