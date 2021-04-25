@@ -5,6 +5,26 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
     },
+
+    title:{
+        fontSize: 17,
+        color: colors.heading,
+        fontFamily: "Jost-Bold",
+        lineHeight: 20,
+        marginTop: 15
+    },
+
+    subTitle:{
+        fontSize: 17,
+        lineHeight: 20,
+        color: colors.heading,
+        fontFamily: "Jost-Light"
+    },
+
+    header:{
+        paddingHorizontal: 30
+    }
+
 });
 
 export default styles;

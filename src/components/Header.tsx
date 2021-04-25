@@ -14,7 +14,7 @@ const Header = () =>{
     return(
         <View style={styles.container}>
             <View>
-                <Text style={styles.greting}>Olá</Text>
+                <Text style={styles.greting}>Olá,</Text>
                 <Text style={styles.userName}>João</Text>
             </View>
             
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingVertical: 20,
         alignItems: 'center',
-        padding: 20
     },
 
     image:{
