@@ -24,9 +24,25 @@ const PlantSelected = () => {
                     você quer por suas plantas?
                 </Text>
 
-                <EnviromentButton title="Ativo" active/>
 
             </View>
+                <View>
+                    <FlatList
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.eviromentList}
+                        data={[
+                        {id: "1", title: "1"},
+                        {id: "2", title: "2"},
+                        {id: "3", title: "3"},
+                        {id: "4", title: "4"},
+                        {id: "5", title: "5"}
+                        ]}
+                        keyExtractor={(item) => item.toString()}
+                        renderItem={({item})=>(
+                            <EnviromentButton title={`${item.title}`} active/>
+                        )}/>
+                </View>
         </View>
 
     );

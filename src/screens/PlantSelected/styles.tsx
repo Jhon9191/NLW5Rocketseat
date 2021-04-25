@@ -23,6 +23,14 @@ const styles = StyleSheet.create({
 
     header:{
         paddingHorizontal: 30
+    },
+
+    eviromentList:{
+        height: 40,
+        justifyContent: 'center',
+        paddingBottom: 5,
+        marginLeft: 32,
+        marginVertical: 32
     }
 
 });

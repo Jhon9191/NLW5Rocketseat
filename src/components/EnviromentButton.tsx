@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: 76,
         borderRadius: 15,
-        marginRight: 5
+        marginRight: 9
     },
 
     containerActive:{
