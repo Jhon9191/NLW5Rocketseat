@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     Text,
@@ -7,11 +7,29 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core'
 import styles from './styles';
-
 import Header from '../../components/Header'
 import EnviromentButton from '../../components/EnviromentButton';
+import api from '../../services/api';
+
+interface EnviromentProps{
+    key: string;
+    title: string;
+}
 
 const PlantSelected = () => {
+
+    const [ enviroment, setEnviroment ] = useState<EnviromentProps[]>([]);
+
+    useEffect(()=>{
+        const facthEnviroment = async() => {
+            const { data } = await api.get("plants_environments");
+            setEnviroment([
+                {key: "all", title: "Todos"},
+                ...data
+            ])
+        }
+        facthEnviroment();
+    },[])
 
     return (
         <View style={styles.container}>
@@ -31,16 +49,10 @@ const PlantSelected = () => {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                         contentContainerStyle={styles.eviromentList}
-                        data={[
-                        {id: 1, title: "1"},
-                        {id: 2, title: "2"},
-                        {id: 3, title: "3"},
-                        {id: 4, title: "4"},
-                        {id: 5, title: "5"}
-                        ]}
-                        keyExtractor={(item) => item.id.toString()}
+                        data={enviroment}
+                        keyExtractor={(item) => item.key.toString()}
                         renderItem={({item})=>(
-                            <EnviromentButton title={`${item.title}`} active/>
+                            <EnviromentButton title={item.title} />
                         )}/>
                 </View>
         </View>
