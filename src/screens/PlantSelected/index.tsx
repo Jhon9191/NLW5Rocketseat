@@ -38,7 +38,7 @@ const PlantSelected = () => {
     const [enviroment, setEnviroment] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
-    const [enviromentSelected, setEnviromentSelected] = useState('');
+    const [enviromentSelected, setEnviromentSelected] = useState('all');
     const [loading, setLoading] = useState(true);
 
     function handleSelectEnviroment(enviroment: string) {
@@ -66,10 +66,10 @@ const PlantSelected = () => {
         const facthPlants = async () => {
             const { data } = await api.get("plants?_sort=name&_order=asc");
             setPlants(data)
+            setFilteredPlants(data)
             setLoading(false)
         }
         facthPlants();
-    
     }, []);
 
     if(loading)
