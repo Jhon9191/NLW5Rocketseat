@@ -39,7 +39,7 @@ const PlantSelected = () => {
 
     useEffect(() => {
         const facthEnviroment = async () => {
-            const { data } = await api.get("plants_environments");
+            const { data } = await api.get("plants_environments?_sort=title&_order=asc");
             setEnviroment([
                 { key: "all", title: "Todos" },
                 ...data
@@ -50,7 +50,7 @@ const PlantSelected = () => {
 
     useEffect(() => {
         const facthPlants = async () => {
-            const { data } = await api.get("plants");
+            const { data } = await api.get("plants?_sort=name&_order=asc");
             setPlants(data)
         }
         facthPlants();
@@ -86,7 +86,6 @@ const PlantSelected = () => {
                     data={plants}
                     //keyExtractor={item => item.id}
                     numColumns={2}
-                    contentContainerStyle={styles.plantList}
                     showsVerticalScrollIndicator={false}
                     renderItem={(
                         { item }) => (<PlantCardPrimary data={item} />

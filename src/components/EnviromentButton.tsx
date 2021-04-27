@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 40,
         width: 76,
-        borderRadius: 15,
-        marginRight: 9
+        borderRadius: 12,
+        marginHorizontal: 6
     },
 
     containerActive:{
