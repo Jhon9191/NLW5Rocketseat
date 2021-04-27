@@ -36,17 +36,29 @@ const PlantSelected = () => {
 
     const [enviroment, setEnviroment] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
-    const [enviromentSelected, setEnviromentSelected] = useState("all");
+    const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
+    const [enviromentSelected, setEnviromentSelected] = useState("");
 
-    function handleSelectEnviroment  (enviroment : string) {
+    function handleSelectEnviroment (enviroment: string) {
         setEnviromentSelected(enviroment)
+
+        if (enviroment === 'all') {
+            return setFilteredPlants(plants)
+        } else {
+            const filtered = plants.filter(plant =>
+                plant.environments.includes(enviroment)
+            );
+
+            setFilteredPlants(filtered);
+        }
+
     }
 
     useEffect(() => {
         const facthEnviroment = async () => {
             const { data } = await api.get("plants_environments?_sort=title&_order=asc");
             setEnviroment([
-                { key: "all", title: "Todos" },
+                { key: 'all', title: 'Todos' },
                 ...data
             ])
         }
@@ -82,24 +94,24 @@ const PlantSelected = () => {
                     data={enviroment}
                     keyExtractor={(item) => item.key.toString()}
                     renderItem={({ item }) => (
-                        <EnviromentButton 
-                        title={item.title} 
-                        active={item.key === enviromentSelected}
-                        onPress={()=>handleSelectEnviroment(item.key)}
+                        <EnviromentButton
+                            title={item.title}
+                            active={item.key == enviromentSelected}
+                            onPress={() => handleSelectEnviroment(item.key)}
                         />
-                    )}/>
+                    )} />
             </View>
 
             <View style={styles.plants}>
                 <FlatList
-                    data={plants}
+                    data={filteredPlants}
                     //keyExtractor={item => item.id}
                     numColumns={2}
                     showsVerticalScrollIndicator={false}
                     renderItem={(
                         { item }) => (
-                        <PlantCardPrimary 
-                        data={item} 
+                        <PlantCardPrimary
+                            data={item}
                         />
                     )}
 
