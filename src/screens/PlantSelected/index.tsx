@@ -37,21 +37,16 @@ const PlantSelected = () => {
     const [enviroment, setEnviroment] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
-    const [enviromentSelected, setEnviromentSelected] = useState("");
+    const [enviromentSelected, setEnviromentSelected] = useState('');
 
     function handleSelectEnviroment (enviroment: string) {
         setEnviromentSelected(enviroment)
-
-        if (enviroment === 'all') {
-            return setFilteredPlants(plants)
-        } else {
-            const filtered = plants.filter(plant =>
-                plant.environments.includes(enviroment)
-            );
-
-            setFilteredPlants(filtered);
-        }
-
+        if (enviroment == 'all') 
+            return setFilteredPlants(plants);
+        const filtered = plants.filter(plant =>
+            plant.environments.includes(enviroment)
+        );
+        setFilteredPlants(filtered);
     }
 
     useEffect(() => {
