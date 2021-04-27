@@ -13,6 +13,7 @@ import api from '../../services/api';
 import Header from '../../components/Header'
 import EnviromentButton from '../../components/EnviromentButton';
 import PlantCardPrimary from '../../components/PlantCardPrimary';
+import Load from '../../components/Load';
 
 interface EnviromentProps {
     key: string;
@@ -38,10 +39,11 @@ const PlantSelected = () => {
     const [plants, setPlants] = useState<PlantsProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
     const [enviromentSelected, setEnviromentSelected] = useState('');
+    const [loading, setLoading] = useState(true);
 
-    function handleSelectEnviroment (enviroment: string) {
+    function handleSelectEnviroment(enviroment: string) {
         setEnviromentSelected(enviroment)
-        if (enviroment == 'all') 
+        if (enviroment == 'all')
             return setFilteredPlants(plants);
         const filtered = plants.filter(plant =>
             plant.environments.includes(enviroment)
@@ -64,10 +66,14 @@ const PlantSelected = () => {
         const facthPlants = async () => {
             const { data } = await api.get("plants?_sort=name&_order=asc");
             setPlants(data)
+            setLoading(false)
         }
         facthPlants();
+    
     }, []);
 
+    if(loading)
+        return <Load/>
     return (
         <View style={styles.container}>
             <View style={styles.header}>
