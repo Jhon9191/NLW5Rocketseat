@@ -4,6 +4,7 @@ import colors from '../../styles/index';
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        width: "100%",
     },
 
     title:{
@@ -31,7 +32,13 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         marginLeft: 32,
         marginVertical: 32
-    }
+    },
+
+    plants:{
+        flex: 1,
+        paddingHorizontal: 32,
+        justifyContent: 'center',
+    },
 
 });
 
