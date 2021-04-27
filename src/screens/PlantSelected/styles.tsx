@@ -4,7 +4,6 @@ import colors from '../../styles/index';
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        width: "100%",
     },
 
     title:{
@@ -29,8 +28,7 @@ const styles = StyleSheet.create({
     eviromentList:{
         height: 40,
         justifyContent: 'center',
-        paddingBottom: 5,
-        marginLeft: 32,
+        left: 10,
         marginVertical: 32
     },
 

@@ -36,6 +36,11 @@ const PlantSelected = () => {
 
     const [enviroment, setEnviroment] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
+    const [enviromentSelected, setEnviromentSelected] = useState("all");
+
+    function handleSelectEnviroment  (enviroment : string) {
+        setEnviromentSelected(enviroment)
+    }
 
     useEffect(() => {
         const facthEnviroment = async () => {
@@ -77,8 +82,12 @@ const PlantSelected = () => {
                     data={enviroment}
                     keyExtractor={(item) => item.key.toString()}
                     renderItem={({ item }) => (
-                        <EnviromentButton title={item.title} />
-                    )} />
+                        <EnviromentButton 
+                        title={item.title} 
+                        active={item.key === enviromentSelected}
+                        onPress={()=>handleSelectEnviroment(item.key)}
+                        />
+                    )}/>
             </View>
 
             <View style={styles.plants}>
@@ -88,7 +97,10 @@ const PlantSelected = () => {
                     numColumns={2}
                     showsVerticalScrollIndicator={false}
                     renderItem={(
-                        { item }) => (<PlantCardPrimary data={item} />
+                        { item }) => (
+                        <PlantCardPrimary 
+                        data={item} 
+                        />
                     )}
 
                 />
