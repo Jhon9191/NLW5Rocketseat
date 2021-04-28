@@ -3,10 +3,12 @@ import {
     SafeAreaView,
     Text,
     View,
-    FlatList
+    FlatList,
+    ActivityIndicator
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core'
 
+import color from '../../styles/index'
 import styles from './styles';
 import api from '../../services/api';
 
@@ -41,7 +43,11 @@ const PlantSelected = () => {
     const [enviromentSelected, setEnviromentSelected] = useState('all');
     const [loading, setLoading] = useState(true);
 
-    function handleSelectEnviroment(enviroment: string) {
+    const [page, setPage] = useState(1);
+    const [loadMore, setLoadMore] = useState(false);
+    const [loadedAll, setLoadedAll] = useState(false);
+
+    const handleSelectEnviroment = (enviroment: string) => {
         setEnviromentSelected(enviroment)
         if (enviroment == 'all')
             return setFilteredPlants(plants);
@@ -49,6 +55,31 @@ const PlantSelected = () => {
             plant.environments.includes(enviroment)
         );
         setFilteredPlants(filtered);
+    }
+
+    const facthPlants = async () => {
+        const { data } = await api.
+        get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
+        if(!data)
+            return setLoading(true);
+        if(page > 1){
+            setPlants(OldValue => [...OldValue, ...data]);
+            setFilteredPlants(OldValue => [...OldValue, ...data]);
+        }else{
+            setPlants(data)
+            setFilteredPlants(data)
+        }
+    
+        setLoading(false)
+        setLoadMore(false)
+    }
+
+    const handleFecthMore = async (distance: number) => {
+        if(distance < 1)
+            return;
+        setLoadMore(true);
+        setPage(OldValue => OldValue + 1)
+        facthPlants();
     }
 
     useEffect(() => {
@@ -63,17 +94,12 @@ const PlantSelected = () => {
     }, []);
 
     useEffect(() => {
-        const facthPlants = async () => {
-            const { data } = await api.get("plants?_sort=name&_order=asc");
-            setPlants(data)
-            setFilteredPlants(data)
-            setLoading(false)
-        }
+
         facthPlants();
     }, []);
 
-    if(loading)
-        return <Load/>
+    // if (loading)
+    //     return <Load />
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -109,14 +135,23 @@ const PlantSelected = () => {
                     //keyExtractor={item => item.id}
                     numColumns={2}
                     showsVerticalScrollIndicator={false}
+                    onEndReachedThreshold={0.10}
+                    onEndReached={({ distanceFromEnd }) => handleFecthMore(distanceFromEnd)}
                     renderItem={(
                         { item }) => (
                         <PlantCardPrimary
                             data={item}
                         />
                     )}
-
+                    ListFooterComponent={
+                        loadMore ?
+                        <ActivityIndicator
+                            color={color.green}
+                        />
+                        : <></>
+                    }
                 />
+
             </View>
 
 
