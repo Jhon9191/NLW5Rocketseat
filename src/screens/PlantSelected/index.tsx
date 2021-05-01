@@ -84,7 +84,7 @@ const PlantSelected = () => {
     }
 
     const handleSelectPlant = (item : PlantsProps) => {
-        navigation.navigate("Selected")
+        navigation.navigate("Selected", { item })
     }
 
     useEffect(() => {
