@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     View,
     Image,
@@ -7,15 +7,25 @@ import {
 } from 'react-native'
 
 import colors from '../styles'
-
-import watering from '../assets/watering.png'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const Header = () =>{
+
+    const [ name, setName ] = useState<string>("");
+    useEffect(() =>{
+        const loadNameUser = async() => {
+            const user = await AsyncStorage.getItem("USER_NAME")
+            setName(user || "");
+        }
+
+        loadNameUser();
+    },[])
+
     return(
         <View style={styles.container}>
             <View>
                 <Text style={styles.greting}>Olá,</Text>
-                <Text style={styles.userName}>João</Text>
+                <Text style={styles.userName}>{name}</Text>
             </View>
             
             <Image style={styles.image} 
