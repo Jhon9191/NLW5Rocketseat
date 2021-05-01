@@ -27,7 +27,7 @@ const Header = () =>{
                 <Text style={styles.greting}>Olá,</Text>
                 <Text style={styles.userName}>{name}</Text>
             </View>
-            
+        
             <Image style={styles.image} 
             source={{uri : "https://avatars.githubusercontent.com/u/47609014?v=4"}} resizeMode="contain" />
 

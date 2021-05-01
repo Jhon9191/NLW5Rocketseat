@@ -8,6 +8,7 @@ import colors from '../styles'
 import {
     SvgFromUri
 } from 'react-native-svg';
+
 interface PlantsProps extends RectButtonProps {
     data: {
         name: string;

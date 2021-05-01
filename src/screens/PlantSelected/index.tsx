@@ -37,6 +37,8 @@ interface PlantsProps {
 
 const PlantSelected = () => {
 
+    const navigation = useNavigation();
+
     const [enviroment, setEnviroment] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
@@ -45,7 +47,6 @@ const PlantSelected = () => {
 
     const [page, setPage] = useState(1);
     const [loadMore, setLoadMore] = useState(false);
-    const [loadedAll, setLoadedAll] = useState(false);
 
     const handleSelectEnviroment = (enviroment: string) => {
         setEnviromentSelected(enviroment)
@@ -80,6 +81,10 @@ const PlantSelected = () => {
         setLoadMore(true);
         setPage(OldValue => OldValue + 1)
         facthPlants();
+    }
+
+    const handleSelectPlant = (item : PlantsProps) => {
+        navigation.navigate("Selected")
     }
 
     useEffect(() => {
@@ -119,7 +124,7 @@ const PlantSelected = () => {
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={styles.eviromentList}
                     data={enviroment}
-                    keyExtractor={(item) => item.key.toString()}
+                    keyExtractor={(item) => String(item.key)}
                     renderItem={({ item }) => (
                         <EnviromentButton
                             title={item.title}
@@ -132,7 +137,7 @@ const PlantSelected = () => {
             <View style={styles.plants}>
                 <FlatList
                     data={filteredPlants}
-                    //keyExtractor={item => item.id}
+                    keyExtractor={(item) => String(item.id)}
                     numColumns={2}
                     showsVerticalScrollIndicator={false}
                     onEndReachedThreshold={0.10}
@@ -141,6 +146,7 @@ const PlantSelected = () => {
                         { item }) => (
                         <PlantCardPrimary
                             data={item}
+                            onPress={()=>handleSelectPlant(item)}
                         />
                     )}
                     ListFooterComponent={
