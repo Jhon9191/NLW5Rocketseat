@@ -98,8 +98,8 @@ const PlantSelected = () => {
         facthPlants();
     }, []);
 
-    // if (loading)
-    //     return <Load />
+    if (loading)
+        return <Load />
     return (
         <View style={styles.container}>
             <View style={styles.header}>

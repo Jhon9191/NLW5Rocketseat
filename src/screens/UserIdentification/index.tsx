@@ -6,23 +6,25 @@ import {
     TextInput,
     KeyboardAvoidingView,
     Platform,
-    PushNotification
+    Alert
 } from 'react-native';
 import { useNavigation } from  '@react-navigation/core'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Button from '../../components/Button'
 import colors from '../../styles/index'
+import AsyncStorage from '@react-native-community/async-storage'
 Icon.loadFont();
 
 const UserIdentification = () => {
     
     const navigation = useNavigation()
 
-    const hancleNavigate = () =>{
-        if(name !== ""){
-            navigation.navigate("Confirmation")
-        }
+    const hancleNavigate = async () =>{
+        if(!name)
+            return Alert.alert("Informe seu nome !")
+        await AsyncStorage.setItem("USER_NAME", name)
+        navigation.navigate("Confirmation") 
     }
 
     const [ isFocus, setIsFocus ] = useState(false);
