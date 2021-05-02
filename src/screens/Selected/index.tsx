@@ -15,7 +15,7 @@ import Datetimepicker, { Event } from '@react-native-community/datetimepicker';
 import waterDrop from '../../assets/waterdrop.png';
 import Button from '../../components/Button';
 import { isBefore, format } from 'date-fns';
-import { PlantProps, savePlant } from '../../Libs/storage';
+import { loadPlant, PlantProps, savePlant } from '../../Libs/storage';
 
 interface PlantsPropsS {
     item: PlantProps
@@ -29,14 +29,16 @@ const Selected = () => {
     const [ showDatePicker, setShowDatePicker ] = useState(true);
 
     const handleSave = async () => {
-        try{
-            await savePlant({
-                ...item,
-                dateNotificationTime: selectedTime
-            })
-        }catch(error){ 
-            Alert.alert("Escolha uma hora do futuro!") 
-        }
+        const data = await loadPlant();
+        console.log(data);
+        // try{
+        //     await savePlant({
+        //         ...item,
+        //         dateNotificationTime: selectedTime
+        //     })
+        // }catch(error){ 
+        //     Alert.alert("Escolha uma hora do futuro!") 
+        // }
     }
 
     const handleSetTime = (Event: Event, dateTime : Date | undefined) => {
