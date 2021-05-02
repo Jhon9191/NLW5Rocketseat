@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     SafeAreaView,
     Text,
@@ -15,28 +15,29 @@ import Datetimepicker, { Event } from '@react-native-community/datetimepicker';
 import waterDrop from '../../assets/waterdrop.png';
 import Button from '../../components/Button';
 import { isBefore, format } from 'date-fns';
+import { PlantProps, savePlant } from '../../Libs/storage';
 
-interface PlantsProps {
-    item: {
-        id: string;
-        name: string;
-        about: string;
-        water_tips: string;
-        photo: string;
-        environments: [string];
-        frequency: {
-            times: number,
-            repeat_every: string
-        };
-    }
+interface PlantsPropsS {
+    item: PlantProps
 }
 
 const Selected = () => {
 
     const route = useRoute();
-    const { item } = route.params as PlantsProps;
+    const { item } = route.params as PlantsPropsS;
     const [ selectedTime,  setSelectedTime ] = useState(new Date);
     const [ showDatePicker, setShowDatePicker ] = useState(true);
+
+    const handleSave = async () => {
+        try{
+            await savePlant({
+                ...item,
+                dateNotificationTime: selectedTime
+            })
+        }catch(error){ 
+            Alert.alert("Escolha uma hora do futuro!") 
+        }
+    }
 
     const handleSetTime = (Event: Event, dateTime : Date | undefined) => {
         if(Platform.OS === "android"){
@@ -93,7 +94,7 @@ const Selected = () => {
                     <Text style={styles.pcikerText}>{`Mudar horário ${format(selectedTime, 'HH:mm')}`}</Text>
                 </TouchableOpacity>
 
-                <Button title="Cadastrar Planta" onPress={() => { }} />
+                <Button title="Cadastrar Planta" onPress={() => handleSave()} />
 
             </View>
         </SafeAreaView>
