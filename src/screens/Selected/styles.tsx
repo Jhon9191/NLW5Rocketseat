@@ -72,7 +72,17 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
 
+    pcikerButton:{
+        paddingVertical: 40,
+        width: "100%",
+        alignItems: 'center'
+    },
 
+    pcikerText:{
+        color: colors.heading,
+        fontFamily: 'Jost-Bold',
+        fontSize: 24,
+    },
 
 
 });

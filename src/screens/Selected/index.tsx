@@ -5,7 +5,8 @@ import {
     View,
     Image,
     Platform,
-    Alert
+    Alert,
+    TouchableOpacity
 } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import styles from './styles';
@@ -13,7 +14,7 @@ import { useRoute } from '@react-navigation/native'
 import Datetimepicker, { Event } from '@react-native-community/datetimepicker';
 import waterDrop from '../../assets/waterdrop.png';
 import Button from '../../components/Button';
-import { isBefore } from 'date-fns';
+import { isBefore, format } from 'date-fns';
 
 interface PlantsProps {
     item: {
@@ -49,7 +50,10 @@ const Selected = () => {
 
         if(dateTime )
             setSelectedTime(dateTime)
+    }
 
+    const handlePicker = () => {
+        setShowDatePicker(oldValue => !oldValue)
     }
 
     return (
@@ -84,6 +88,10 @@ const Selected = () => {
                     onChange={handleSetTime}
                 />
                 )}
+
+                <TouchableOpacity style={styles.pcikerButton} onPress={()=>handlePicker()}>
+                    <Text style={styles.pcikerText}>{`Mudar horário ${format(selectedTime, 'HH:mm')}`}</Text>
+                </TouchableOpacity>
 
                 <Button title="Cadastrar Planta" onPress={() => { }} />
 
