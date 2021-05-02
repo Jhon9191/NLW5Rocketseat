@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { isBefore } from 'date-fns';
+import { format, isBefore } from 'date-fns';
 
 
 export interface PlantProps {
@@ -44,12 +44,26 @@ export const savePlant = async (plant : PlantProps) : Promise<void> => {
     }
 }
 
-export const loadPlant = async () : Promise<StoragePlants> => {
+export const loadPlant = async () : Promise<PlantProps[]> => {
     try{
         const data = await AsyncStorage.getItem('@plantmanager:plant');
         const plants = data ? (JSON.parse(data) as StoragePlants) : {};
 
-        return plants;
+        const plantSorted = Object
+        .keys(plants)
+        .map((plant) => {
+            return{
+                ...plants[plant].data,
+                hour: format(new Date(plants[plant].data.dateNotificationTime), 'HH:mm')
+            }
+        })
+        .sort((a, c) => 
+            Math.floor(
+                new Date(a.dateNotificationTime).getTime() / 1000 -
+                Math.floor(new Date(c.dateNotificationTime).getTime() / 1000)
+            )
+        );
+        return plantSorted;
 
     }catch(error){
         throw new Error(error);  
