@@ -8,6 +8,7 @@ import UserIdentification from '../screens/UserIdentification';
 import Confirmation from '../screens/Confirmation';
 import PlantSeleted from '../screens/PlantSelected';
 import Selected from '../screens/Selected';
+import MyPlants from '../screens/MyPlants';
 
 const AppRoutes: React.FC = () => (
     <stack.Navigator
@@ -42,6 +43,11 @@ const AppRoutes: React.FC = () => (
             name="Selected"
             component={Selected}
         />
+
+        <stack.Screen
+            name="MyPlants"
+            component={MyPlants}
+        />  
 
     </stack.Navigator>
 )

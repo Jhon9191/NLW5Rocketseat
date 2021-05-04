@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import styles from './styles';
-import { useRoute } from '@react-navigation/native'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import Datetimepicker, { Event } from '@react-native-community/datetimepicker';
 import waterDrop from '../../assets/waterdrop.png';
 import Button from '../../components/Button';
@@ -23,6 +23,7 @@ interface PlantsPropsS {
 
 const Selected = () => {
 
+    const navigation = useNavigation();
     const route = useRoute();
     const { item } = route.params as PlantsPropsS;
     const [ selectedTime,  setSelectedTime ] = useState(new Date);
@@ -36,6 +37,13 @@ const Selected = () => {
                 ...item,
                 dateNotificationTime: selectedTime
             })
+            navigation.navigate("Confirmation",{ 
+                title: "Prontinho",
+                subTitle: "Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado",
+                buttonTitle: "Muito obrigado :D",
+                icon: "hug",
+                screen: "MyPlants"
+            }) 
         }catch(error){ 
             Alert.alert("Escolha uma hora do futuro!") 
         }
