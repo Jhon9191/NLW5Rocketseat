@@ -14,6 +14,7 @@ export interface PlantProps {
         repeat_every: string;
     },
     dateNotificationTime: Date;
+    hour: string;
 }
 
 interface StoragePlants{

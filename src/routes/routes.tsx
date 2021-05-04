@@ -10,6 +10,9 @@ import PlantSeleted from '../screens/PlantSelected';
 import Selected from '../screens/Selected';
 import MyPlants from '../screens/MyPlants';
 
+import SelectedTabs from './tab.routes';
+
+
 const AppRoutes: React.FC = () => (
     <stack.Navigator
         headerMode="none"
@@ -36,7 +39,7 @@ const AppRoutes: React.FC = () => (
 
         <stack.Screen
             name="PlantSeleted"
-            component={PlantSeleted}
+            component={SelectedTabs}
         />
 
         <stack.Screen
