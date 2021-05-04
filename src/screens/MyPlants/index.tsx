@@ -57,7 +57,7 @@ export const MyPlants = () => {
                     data={myPlants}
                     keyExtractor={(item)=>String(item.id)}
                     renderItem={({item})=>( 
-                        <Text>Elemento</Text>
+                        <PlantCardSecundary data={item}/>
                     )}
                     showsVerticalScrollIndicator={false}
                 />
