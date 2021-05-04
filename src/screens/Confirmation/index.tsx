@@ -4,15 +4,37 @@ import {
     Text,
     View,
 } from 'react-native';
-import { useNavigation } from  '@react-navigation/core'
+import { useNavigation, useRoute } from  '@react-navigation/core'
 import styles from './styles'
 import Button from '../../components/Button'
 
+interface Parms {
+    title: string;
+    subTitle: string;
+    buttonTitle: string;
+    icon: 'smile' | 'hug';
+    screen: string;
+}
+
+const emojis = {
+    hug: '🤗',
+    smile: '😄',
+}
+
 const Confirmation = () => {
-    const navigation = useNavigation()
-    
+    const navigation = useNavigation();
+    const route = useRoute();
+
+    const {
+        title,
+        subTitle,
+        buttonTitle,
+        icon,
+        screen
+    } = route.params as Parms
+
     const hancleNavigate = () =>{
-        navigation.navigate("PlantSeleted")
+        navigation.navigate(screen)
     }
 
     return (
@@ -20,18 +42,17 @@ const Confirmation = () => {
             <View style={styles.content}>
                     
                         <Text style={styles.emoji}>
-                            😄    
+                            {emojis[icon]}    
                         </Text>
                         <Text style={styles.title}>
-                            Prontinho
+                            {title}
                         </Text>
                         <Text style={styles.description}>
-                            Agora vamos começar a cuidar das suas {`\n`}
-                             plantinhas com muito cuidado.
+                            {subTitle}
                         </Text>
                        
                         <View style={styles.footer}>
-                            <Button title="Confirmar" onPress={hancleNavigate}/>
+                            <Button title={buttonTitle} onPress={hancleNavigate}/>
                         </View>
                     </View>
         </SafeAreaView>

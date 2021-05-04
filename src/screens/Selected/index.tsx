@@ -29,16 +29,16 @@ const Selected = () => {
     const [ showDatePicker, setShowDatePicker ] = useState(true);
 
     const handleSave = async () => {
-        const data = await loadPlant();
-        console.log(data);
-        // try{
-        //     await savePlant({
-        //         ...item,
-        //         dateNotificationTime: selectedTime
-        //     })
-        // }catch(error){ 
-        //     Alert.alert("Escolha uma hora do futuro!") 
-        // }
+        // const data = await loadPlant();
+        // console.log(data);
+        try{
+            await savePlant({
+                ...item,
+                dateNotificationTime: selectedTime
+            })
+        }catch(error){ 
+            Alert.alert("Escolha uma hora do futuro!") 
+        }
     }
 
     const handleSetTime = (Event: Event, dateTime : Date | undefined) => {

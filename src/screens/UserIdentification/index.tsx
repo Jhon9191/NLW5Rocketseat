@@ -24,7 +24,13 @@ const UserIdentification = () => {
         if(!name)
             return Alert.alert("Informe seu nome !")
         await AsyncStorage.setItem("USER_NAME", name)
-        navigation.navigate("Confirmation") 
+        navigation.navigate("Confirmation",{ 
+            title: "Prontinho",
+            subTitle: "Agora vamos cuidar das suas plantinhas com muito cuidado",
+            buttonTitle: "Começar",
+            icon: "smile",
+            screen: "PlantSeleted"
+        }) 
     }
 
     const [ isFocus, setIsFocus ] = useState(false);
