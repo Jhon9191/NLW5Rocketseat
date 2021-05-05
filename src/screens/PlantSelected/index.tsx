@@ -4,7 +4,8 @@ import {
     Text,
     View,
     FlatList,
-    ActivityIndicator
+    ActivityIndicator,
+    Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core'
 
@@ -72,7 +73,7 @@ const PlantSelected = () => {
     }
 
     const handleSelectPlant = (item : PlantProps) => {
-        navigation.navigate("Selected", { item })
+        navigation.navigate("Nova", { item })
     }
 
     useEffect(() => {

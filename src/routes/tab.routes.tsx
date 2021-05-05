@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Tab = createBottomTabNavigator();
 
-import Selected from '../screens/PlantSelected';
+import PlantSelected from '../screens/PlantSelected';
 import MinhasPlantas from '../screens/MyPlants';
 
 const TabNavigator = () => {
@@ -19,10 +19,9 @@ const TabNavigator = () => {
                 height: 58,
                 borderColor: 'transparent',
                 elevation: 0,
-                borderWidth: 0
             },
         }}>
-            <Tab.Screen name="Selected" component={Selected}
+            <Tab.Screen name="Selected" component={PlantSelected}
                 options={{
                     tabBarIcon: (({ size, color }) => (
                         <Icon name="add-circle-outline" size={size} color={color} />

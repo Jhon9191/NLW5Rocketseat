@@ -6,13 +6,9 @@ const stack = createStackNavigator();
 import Welcome from '../screens/Welcome';
 import UserIdentification from '../screens/UserIdentification';
 import Confirmation from '../screens/Confirmation';
-import PlantSeleted from '../screens/PlantSelected';
-import Selected from '../screens/Selected';
 import MyPlants from '../screens/MyPlants';
-
-import SelectedTabs from './tab.routes';
-
-
+import Tabs from './tab.routes';
+import Nova from '../screens/Selected'
 const AppRoutes: React.FC = () => (
     <stack.Navigator
         headerMode="none"
@@ -39,12 +35,12 @@ const AppRoutes: React.FC = () => (
 
         <stack.Screen
             name="PlantSeleted"
-            component={SelectedTabs}
+            component={Tabs}
         />
 
         <stack.Screen
-            name="Selected"
-            component={Selected}
+            name="Nova"
+            component={Nova}
         />
 
         <stack.Screen
