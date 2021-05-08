@@ -45,7 +45,7 @@ const AppRoutes: React.FC = () => (
 
         <stack.Screen
             name="MyPlants"
-            component={MyPlants}
+            component={Tabs}
         />  
 
     </stack.Navigator>
