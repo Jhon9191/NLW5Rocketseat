@@ -13,7 +13,7 @@ import { PlantProps, loadPlant } from '../../Libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import PlantCardSecundary from '../../components/PlantCardSecundary';
-
+import Load from '../../components/Load';
 export const MyPlants = () => {
 
     const [ myPlants, setMyPlants  ] = useState<PlantProps[]>([]);
@@ -41,6 +41,8 @@ export const MyPlants = () => {
         loadStorage();
     },[])
 
+    if (loading)
+        return <Load />
     return(
         <SafeAreaView style={styles.container}>
             <Header/>
