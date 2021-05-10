@@ -26,6 +26,7 @@ const PlantCardSecondary = ({ data, handleRemove, ...rest} : PlantProps) => {
     return(
         <Swipeable
             overshootRight={false}
+            overshootLeft={true}
             renderRightActions={() => (
                 <Animated.View>
                     <View>

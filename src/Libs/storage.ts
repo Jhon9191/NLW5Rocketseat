@@ -17,14 +17,14 @@ export interface PlantProps {
     hour: string;
 }
 
-interface StoragePlants{
+export interface StoragePlants {
     [id: string]: {
         data: PlantProps
     }
 }
 
-export const savePlant = async (plant : PlantProps) : Promise<void> => {
-    try{
+export const savePlant = async (plant: PlantProps): Promise<void> => {
+    try {
         const data = await AsyncStorage.getItem('@plantmanager:plant');
         const oldPlants = data ? (JSON.parse(data) as StoragePlants) : {};
 
@@ -35,38 +35,49 @@ export const savePlant = async (plant : PlantProps) : Promise<void> => {
         }
 
         await AsyncStorage.setItem('@plantmanager:plant',
-        JSON.stringify({
-        ...newPlant,
-        ...oldPlants
-        }));
+            JSON.stringify({
+                ...newPlant,
+                ...oldPlants
+            }));
 
-    }catch(error){
-        throw new Error(error);  
+    } catch (error) {
+        throw new Error(error);
     }
 }
 
-export const loadPlant = async () : Promise<PlantProps[]> => {
-    try{
+export const loadPlant = async (): Promise<PlantProps[]> => {
+    try {
         const data = await AsyncStorage.getItem('@plantmanager:plant');
         const plants = data ? (JSON.parse(data) as StoragePlants) : {};
 
         const plantSorted = Object
-        .keys(plants)
-        .map((plant) => {
-            return{
-                ...plants[plant].data,
-                hour: format(new Date(plants[plant].data.dateNotificationTime), 'HH:mm')
-            }
-        })
-        .sort((a, c) => 
-            Math.floor(
-                new Date(a.dateNotificationTime).getTime() / 1000 -
-                Math.floor(new Date(c.dateNotificationTime).getTime() / 1000)
-            )
-        );
+            .keys(plants)
+            .map((plant) => {
+                return {
+                    ...plants[plant].data,
+                    hour: format(new Date(plants[plant].data.dateNotificationTime), 'HH:mm')
+                }
+            })
+            .sort((a, c) =>
+                Math.floor(
+                    new Date(a.dateNotificationTime).getTime() / 1000 -
+                    Math.floor(new Date(c.dateNotificationTime).getTime() / 1000)
+                )
+            );
         return plantSorted;
 
-    }catch(error){
-        throw new Error(error);  
+    } catch (error) {
+        throw new Error(error);
     }
+}
+
+export const removePlant = async (id: string): Promise<void> => {
+    const data = await AsyncStorage.getItem('@plantmanager:plant');
+    const plants = data ? (JSON.parse(data) as StoragePlants) : {};
+
+    delete plants[id]
+    await AsyncStorage.setItem(
+        '@plantmanager:plant',
+        JSON.stringify(plants)
+    );
 }

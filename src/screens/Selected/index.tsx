@@ -99,7 +99,7 @@ const Selected = () => {
                         <Datetimepicker
                             value={selectedTime}
                             mode="time"
-                            display="spinner"
+                            display='spinner'
                             onChange={handleSetTime}
                         />
                     )}
